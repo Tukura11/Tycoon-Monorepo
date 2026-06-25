@@ -129,6 +129,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ className, router: routerProp
         </div>
 
         {/* Animated Tagline */}
+        {/* PERF: Fixed min-height to prevent CLS during TypeAnimation loading/rendering */}
         <div
           aria-live="polite"
           aria-atomic="true"
@@ -157,6 +158,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ className, router: routerProp
           />
         </div>
 
+        {/* PERF: Main Title is LCP candidate - use explicit font sizing to prevent layout shift, data-lcp marker for monitoring */}
         {/* Main Title — single h1 on this page */}
         <h1
           data-testid="hero-main-title"
@@ -174,6 +176,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ className, router: routerProp
 
         {/* Description + Animated Sub-text */}
         <div className="w-full px-4 md:w-[70%] lg:w-[55%] text-center text-[#F0F7F7] -tracking-[2%]">
+          {/* PERF: Fixed min-height container for TypeAnimation subtitle to prevent CLS during animation transitions */}
           <div
             aria-live="polite"
             aria-atomic="true"

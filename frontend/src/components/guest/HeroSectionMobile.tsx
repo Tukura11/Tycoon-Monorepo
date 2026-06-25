@@ -107,6 +107,7 @@ export default function HeroSectionMobile({ className }: HeroSectionMobileProps)
           {t(HERO_I18N.welcome)}
         </p>
 
+        {/* PERF: LCP candidate - min-h and explicit sizing prevent layout shift; animation (animate-pulse) deferred to non-critical */}
         {/* Title */}
         <h1 className="min-h-[42px] font-orbitron font-[900] text-[36px] leading-[42px] tracking-tight uppercase text-[#17ffff]">
           {t(HERO_I18N.title.main)}
