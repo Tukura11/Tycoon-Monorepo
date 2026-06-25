@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable, NotFoundException, BadRequestException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { BoardStyle } from './entities/board-style.entity';
@@ -30,7 +30,15 @@ export class BoardStylesService {
   ) {}
 
   async create(createBoardStyleDto: CreateBoardStyleDto): Promise<BoardStyle> {
-    const style = this.boardStyleRepository.create(createBoardStyleDto);
+    const trimmedName = createBoardStyleDto.name?.trim();
+    if (!trimmedName) {
+      throw new BadRequestException('board style name is required');
+    }
+
+    const style = this.boardStyleRepository.create({
+      ...createBoardStyleDto,
+      name: trimmedName,
+    });
     const saved = await this.boardStyleRepository.save(style);
     await this.invalidateCache();
     return saved;
